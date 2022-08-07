@@ -11,12 +11,16 @@ class Game
     @result = ''
   end
 
-  def play
+  def run
     loop do
-      play_round until over?
-      display_end_screen
+      play
       break unless play_again?
     end
+  end
+
+  def play
+    play_round until over?
+    display_end_screen
   end
 
   def play_round
@@ -110,4 +114,4 @@ class GameBoard
   end
 end
 
-# Game.new.play
+# Game.new.run
