@@ -44,7 +44,20 @@ describe Game do
     end
   end
 
-  describe '#play_round'
+  describe '#play_round' do
+    let(:board) { game.board }
+    before do
+      allow(game).to receive(:switch_player)
+      allow(game).to receive(:get_valid_input).and_return('4')
+      allow(board).to receive(:update)
+    end
+
+    it 'sends board update message' do
+      expect(board).to receive(:update)
+      game.play_round
+    end
+  end
+
   describe '#switch_player'
   describe '#validate_input'
   describe '#over?'
