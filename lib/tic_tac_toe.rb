@@ -25,14 +25,7 @@ class Game
 
   def play_round
     switch_player
-    input_valid = false
-    until input_valid
-      system 'clear'
-      @board.draw
-      puts "#{current_player} make a move (field number 1 to 9)"
-      input = gets.chomp
-      input_valid = validate_input(input)
-    end
+    input = get_valid_input
     @board.update(input, @current_player)
   end
 
@@ -42,6 +35,18 @@ class Game
                       else
                         @player1
                       end
+  end
+
+  def get_valid_input
+    input_valid = false
+    until input_valid
+      system 'clear'
+      @board.draw
+      puts "#{current_player} make a move (field number 1 to 9)"
+      input = gets.chomp
+      input_valid = validate_input(input)
+    end
+    input
   end
 
   def validate_input(move)
@@ -111,6 +116,7 @@ class GameBoard
   def update(move, current_player)
     position = move.to_i - 1 # 1 to 9
     state[position] = current_player
+    puts 'GameBoard#update prints twice??'
   end
 end
 
